@@ -1,7 +1,6 @@
 import 'package:dars3/utils/app_constants.dart';
 import 'package:dars3/views/screens/pin_code_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int countTrue = 0;
@@ -64,37 +63,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    double sceenWidth = MediaQuery.of(context).size.width;
-    return ScreenUtilInit(
-        designSize: sceenWidth > 800 ? Size(1440, 900) : Size(414, 896),
-        builder: (context, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.amber,
-              ),
-            ),
-            darkTheme: ThemeData.dark(),
-            themeMode: AppConstants.themeMode,
-            // home: const PinCodeScreen(),
-            home: PinCodeScreen(
-              onThemeChanged: toggleThemeMode,
-              onBackgroundImageChanged: backgroundImage,
-              onAppBarColorChanged: appBarColor,
-              onTextFontSize: fontSize,
-              onTextColor: textColor,
-            ),
-          );
-        });
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.amber,
+        ),
+      ),
+      darkTheme: ThemeData.dark(),
+      themeMode: AppConstants.themeMode,
+      // home: const PinCodeScreen(),
+      home: PinCodeScreen(
+        onThemeChanged: toggleThemeMode,
+        onBackgroundImageChanged: backgroundImage,
+        onAppBarColorChanged: appBarColor,
+        onTextFontSize: fontSize,
+        onTextColor: textColor,
+      ),
+    );
   }
 }
-
-// MaterialApp(
-//             debugShowCheckedModeBanner: false,
-//             home: Scaffold(
-//               backgroundColor: Colors.white,
-//               body: sceenWidth > 800 ? DesktopScreen() : MobilScreen(),
-//             ),
-//           );
-

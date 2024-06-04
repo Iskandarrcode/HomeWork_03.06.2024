@@ -3,13 +3,14 @@ import 'package:dars3/views/screens/profile_screen.dart';
 import 'package:dars3/views/screens/results_screen.dart';
 import 'package:flutter/material.dart';
 
-class NavigationBars extends StatefulWidget {
+class ReloadNavigationBar extends StatefulWidget {
   final ValueChanged<bool> onThemeChanged;
   final ValueChanged<String> onBackgroundImageChanged;
   final ValueChanged<Color> onAppBarColorChanged;
   final ValueChanged<double> onTextFontSize;
   final ValueChanged<Color> onTextColor;
-  const NavigationBars({
+
+  const ReloadNavigationBar({
     super.key,
     required this.onThemeChanged,
     required this.onBackgroundImageChanged,
@@ -19,13 +20,14 @@ class NavigationBars extends StatefulWidget {
   });
 
   @override
-  State<NavigationBars> createState() => _NavigationBarsState();
+  State<ReloadNavigationBar> createState() {
+    return _ReloadNavigationState();
+  }
 }
 
-class _NavigationBarsState extends State<NavigationBars> {
-  int selectIndex = 0;
+class _ReloadNavigationState extends State<ReloadNavigationBar> {
   late List<Widget> screens;
-
+  int selectIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -42,36 +44,9 @@ class _NavigationBarsState extends State<NavigationBars> {
     ];
   }
 
-  void onItemTap(int index) {
-    setState(() {
-      selectIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    return screenWidth <= 512 ? Scaffold(
-      body: screens[selectIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectIndex,
-        onTap: onItemTap,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.repartition_sharp),
-            label: "Results",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-        ],
-      ),
-    ): Scaffold(
+    return Scaffold(
       body: Row(
         children: [
           NavigationRail(
